@@ -1,0 +1,27 @@
+{
+  "wallpaper": "none",
+  "alpha": "100",
+  "special": {
+    "background": "{{bg}}",
+    "foreground": "{{fg}}",
+    "cursor":     "{{fg}}"
+  },
+  "colors": {
+    "color0":  "{{bg}}",
+    "color1":  "{{pink}}",
+    "color2":  "{{green}}",
+    "color3":  "{{yellow}}",
+    "color4":  "{{blue}}",
+    "color5":  "{{purple}}",
+    "color6":  "{{teal}}",
+    "color7":  "{{fg}}",
+    "color8":  "{{bg2}}",
+    "color9":  "{{pink}}",
+    "color10": "{{green}}",
+    "color11": "{{yellow}}",
+    "color12": "{{cyan}}",
+    "color13": "{{purple}}",
+    "color14": "{{teal}}",
+    "color15": "{{fg}}"
+  }
+}

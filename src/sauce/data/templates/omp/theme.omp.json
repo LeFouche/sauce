@@ -1,0 +1,82 @@
+{
+  "$schema": "https://ohmyposh.dev/schema.json",
+  "version": 3,
+  "final_space": true,
+  "console_title_template": "{{ .Shell }} \u2014 {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "{{bg2}}",
+          "template": "\u250c "
+        },
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "{{cyan}}",
+          "template": "{{.Icon}}  "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "{{fg}}",
+          "properties": {
+            "style": "full",
+            "folder_separator_icon": "/"
+          },
+          "template": "{{ .Path }}"
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "overflow": "hidden",
+      "segments": [
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "{{green}}",
+          "properties": {
+            "fetch_status": true
+          },
+          "template": " {{ .HEAD }}{{ if .Working.Changed }} \u00b1{{ .Working.String }}{{ end }}{{ if .Staging.Changed }} +{{ .Staging.String }}{{ end }}  "
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "{{fg1}}",
+          "properties": {
+            "time_format": "15:04"
+          },
+          "template": "{{ .CurrentDate | date .Format }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "{{bg2}}",
+          "template": "\u2514 "
+        },
+        {
+          "type": "exit",
+          "style": "plain",
+          "foreground": "{{cyan}}",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}{{error}}{{ end }}"
+          ],
+          "template": "\u276f "
+        }
+      ]
+    }
+  ]
+}

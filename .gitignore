@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Runtime artifacts (machine-specific)
+src/sauce/data/generated/
+
+# Test
+.pytest_cache/
+.coverage

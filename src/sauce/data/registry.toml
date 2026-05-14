@@ -1,0 +1,125 @@
+# ~/.config/themr/registry.toml
+# Add a new [[app]] block to register a new application.
+# Fields:
+#   id         — unique identifier (used in CLI output)
+#   reload_cmd — shell command to signal the app after switching; "" = none
+#                if it starts with ~ or / it is treated as a script and receives
+#                the palette spec ("nord:dark") as $1
+#   files      — list of { template, output [, copy] }
+#                template: path relative to templates/
+#                output:   destination path (~ expanded); "" = generate only, no symlink
+#                copy:     true = copy file content instead of symlinking (QS hot-reload)
+
+[[app]]
+id         = "gtk3"
+reload_cmd = "~/.local/bin/sauce-gtk-settings-apply"
+files = [
+  { template = "gtk/colors.css", output = "~/.config/gtk-3.0/colors.css" }
+]
+
+[[app]]
+id         = "gtk4"
+reload_cmd = "~/.local/bin/sauce-gtk-settings-apply"
+files = [
+  { template = "gtk/colors.css", output = "~/.config/gtk-4.0/colors.css" }
+]
+
+[[app]]
+id         = "swaync"
+reload_cmd = "swaync-client --reload-css"
+files = [
+  { template = "gtk/colors.css", output = "~/.config/swaync/colors.css" }
+]
+
+[[app]]
+id         = "kitty"
+reload_cmd = "pkill -USR1 kitty"
+files = [
+  { template = "kitty/colors.conf", output = "~/.config/kitty/colors.conf" }
+]
+
+[[app]]
+id         = "hyprland"
+reload_cmd = "hyprctl reload"
+files = [
+  { template = "hyprland/colors.conf", output = "~/.config/hypr/colors.conf" },
+  { template = "hyprland/colors.conf", output = "~/.config/hypr/hyprlock-colors.conf" }
+]
+
+[[app]]
+id         = "rofi"
+reload_cmd = ""
+files = [
+  { template = "rofi/colors.rasi", output = "~/.config/rofi/colors.rasi" }
+]
+
+[[app]]
+id         = "firefox"
+reload_cmd = ""
+files = [
+  { template = "firefox/theme-palette.css", output = "~/.config/firefox-themes/theme-palette.css" }
+]
+
+[[app]]
+id         = "thunderbird"
+reload_cmd = ""
+files = [
+  { template = "thunderbird/theme-palette.css", output = "~/.config/thunderbird-themes/theme-palette.css" }
+]
+
+[[app]]
+id         = "spicetify"
+reload_cmd = "~/.local/bin/sauce-spicetify-apply"
+files = [
+  { template = "spicetify/color.ini",  output = "~/.config/spicetify/Themes/generated/color.ini",  copy = true },
+  { template = "spicetify/user.css",   output = "~/.config/spicetify/Themes/generated/user.css",   copy = true }
+]
+
+[[app]]
+id         = "vesktop"
+reload_cmd = ""
+files = [
+  { template = "vesktop/generated-palette.css", output = "~/.config/vesktop/themes/generated-palette.css", copy = true }
+]
+
+[[app]]
+id         = "quickshell"
+reload_cmd = ""
+files = [
+  { template = "quickshell/palette.qml", output = "~/.config/quickshell/default/theme/ActiveTheme.qml", copy = true }
+]
+
+[[app]]
+id         = "vscodium"
+reload_cmd = "~/.local/bin/sauce-vscodium-apply"
+files = [
+  { template = "vscodium/settings-fragment.json", output = "" }
+]
+
+[[app]]
+id         = "kvantum"
+reload_cmd = "~/.local/bin/themr-kvantum-apply"
+files = [
+  { template = "kvantum/themr-generated.kvconfig", output = "~/.config/Kvantum/themr-generated/themr-generated.kvconfig" }
+]
+
+[[app]]
+id         = "omp"
+reload_cmd = ""
+files = [
+  { template = "omp/theme.omp.json", output = "~/.config/oh-my-posh/theme.omp.json" }
+]
+
+[[app]]
+id         = "kvantum_main"
+reload_cmd = ""
+files = [
+  { template = "kvantum/kvantum.kvconfig", output = "~/.config/Kvantum/kvantum.kvconfig", copy = true }
+]
+
+[[app]]
+id         = "pywalfox"
+reload_cmd = "pywalfox update"
+files = [
+  { template = "pywalfox/colors.json", output = "~/.cache/wal/colors.json", copy = true }
+]
