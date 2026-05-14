@@ -1,0 +1,39 @@
+{
+  "_name": "Test",
+  "_default_variant": "dark",
+  "dark": {
+    "bg":      "#1e1e2e",
+    "bg1":     "#313244",
+    "bg2":     "#45475a",
+    "fg":      "#cdd6f4",
+    "fg1":     "#6c7086",
+    "subtext": "#a6adc8",
+    "red":     "#f38ba8",
+    "orange":  "#fab387",
+    "yellow":  "#f9e2af",
+    "green":   "#a6e3a1",
+    "cyan":    "#89dceb",
+    "blue":    "#89b4fa",
+    "purple":  "#b4befe",
+    "pink":    "#f5c2e7",
+    "teal":    "#94e2d5"
+  },
+  "light": {
+    "_mode": "light",
+    "bg":      "#eff1f5",
+    "bg1":     "#e6e9ef",
+    "bg2":     "#ccd0da",
+    "fg":      "#4c4f69",
+    "fg1":     "#9ca0b0",
+    "subtext": "#6c6f85",
+    "red":     "#d20f39",
+    "orange":  "#fe640b",
+    "yellow":  "#df8e1d",
+    "green":   "#40a02b",
+    "cyan":    "#04a5e5",
+    "blue":    "#1e66f5",
+    "purple":  "#7287fd",
+    "pink":    "#ea76cb",
+    "teal":    "#179299"
+  }
+}

@@ -1,0 +1,4 @@
+[[app]]
+id         = "test-app"
+reload_cmd = ""
+files      = []
