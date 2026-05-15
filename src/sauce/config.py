@@ -1,5 +1,6 @@
 """sauce.config — paths, palette loading, and token context."""
 
+import colorsys
 import json
 import os
 import tomllib
@@ -63,6 +64,92 @@ COLOR_ROLE_GROUPS: list[tuple[str, list[str]]] = [
     ("Accents",      ["cyan", "green", "purple", "orange", "yellow", "pink", "teal"]),
     ("Semantic",     ["red", "blue"]),
 ]
+
+
+# ---------------------------------------------------------------------------
+# HSL helpers — used by M3 context builder
+# ---------------------------------------------------------------------------
+
+def _hex_to_hls(hex_color: str) -> tuple[float, float, float]:
+    h = hex_color.lstrip("#")
+    r = int(h[0:2], 16) / 255
+    g = int(h[2:4], 16) / 255
+    b = int(h[4:6], 16) / 255
+    return colorsys.rgb_to_hls(r, g, b)
+
+
+def _hls_to_hex(hue: float, lightness: float, saturation: float) -> str:
+    r, g, b = colorsys.hls_to_rgb(hue, lightness, saturation)
+    return "#{:02x}{:02x}{:02x}".format(round(r * 255), round(g * 255), round(b * 255))
+
+
+def _adjust_lightness(hex_color: str, delta: float) -> str:
+    """Shift lightness of a hex color by delta (−1.0 to +1.0), clamped."""
+    hue, lightness, saturation = _hex_to_hls(hex_color)
+    return _hls_to_hex(hue, max(0.0, min(1.0, lightness + delta)), saturation)
+
+
+# ---------------------------------------------------------------------------
+# Material Design 3 token layer
+# ---------------------------------------------------------------------------
+
+def build_m3_context(tokens: dict) -> dict:
+    """
+    Derive M3 color tokens from the existing sauce token context.
+
+    Every m3_<role> token also gets an m3_<role>_hex variant.
+    Called by build_token_context() — never call directly in templates.
+    """
+    mode = tokens.get("mode", "dark")
+    is_dark = mode == "dark"
+    on_accent = "#ffffff" if is_dark else "#000000"
+    container_delta = -0.3 if is_dark else 0.3
+    fg = tokens.get("fg", "")
+
+    m3: dict[str, str] = {}
+
+    def _set(key: str, val: str) -> None:
+        if val:
+            m3[key] = val
+            m3[f"{key}_hex"] = val.lstrip("#")
+
+    # Accent triads: primary / secondary / tertiary
+    for m3_role, src_role in [
+        ("primary",   "blue"),
+        ("secondary", "teal"),
+        ("tertiary",  "purple"),
+    ]:
+        src = tokens.get(src_role, "")
+        if not src:
+            continue
+        _set(f"m3_{m3_role}", src)
+        _set(f"m3_on_{m3_role}", on_accent)
+        _set(f"m3_{m3_role}_container", _adjust_lightness(src, container_delta))
+        _set(f"m3_on_{m3_role}_container", fg)
+
+    # Error
+    err = tokens.get("red", "")
+    if err:
+        _set("m3_error", err)
+        _set("m3_on_error", "#ffffff")
+        _set("m3_error_container", _adjust_lightness(err, container_delta))
+        _set("m3_on_error_container", fg)
+
+    # Surface / background roles
+    for src_role, m3_role in [
+        ("bg",  "background"),
+        ("bg1", "surface"),
+        ("bg2", "surface_variant"),
+    ]:
+        src = tokens.get(src_role, "")
+        _set(f"m3_{m3_role}", src)
+        _set(f"m3_on_{m3_role}", fg)
+
+    # Outline
+    _set("m3_outline",         tokens.get("subtext", ""))
+    _set("m3_outline_variant", tokens.get("fg1", ""))
+
+    return m3
 
 
 # ---------------------------------------------------------------------------
@@ -170,6 +257,8 @@ def build_token_context(palette: dict, variant: str) -> dict:
         tokens.get("vscodium_theme") or
         ("Default Dark Modern" if mode == "dark" else "Default Light Modern")
     )
+
+    tokens.update(build_m3_context(tokens))
 
     return tokens
 
