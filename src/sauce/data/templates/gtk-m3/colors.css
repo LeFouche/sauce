@@ -19,5 +19,13 @@
 @define-color warning_color         {{m3_tertiary}};
 @define-color success_color         {{m3_secondary}};
 @define-color destructive_color     {{m3_error}};
+@define-color error_bg_color        {{m3_error_container}};
+@define-color error_fg_color        {{m3_on_error_container}};
+@define-color warning_bg_color      {{m3_tertiary_container}};
+@define-color warning_fg_color      {{m3_on_tertiary_container}};
+@define-color success_bg_color      {{m3_secondary_container}};
+@define-color success_fg_color      {{m3_on_secondary_container}};
+@define-color destructive_bg_color  {{m3_error_container}};
+@define-color destructive_fg_color  {{m3_on_error_container}};
 @define-color sidebar_bg_color      {{m3_surface_variant}};
 @define-color sidebar_fg_color      {{m3_on_surface_variant}};
