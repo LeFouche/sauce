@@ -324,6 +324,21 @@ def cmd_dynamic(args: list[str]) -> int:
     return 0 if run_dynamic(remaining[0], variant=variant) else 1
 
 
+def cmd_tui(_args: list[str]) -> int:
+    """Launch the Textual TUI palette manager."""
+    try:
+        from .tui import run
+    except ImportError:
+        print(
+            "error: TUI dependencies not installed.\n"
+            "       Run: pip install sauce[tui]",
+            file=sys.stderr,
+        )
+        return 1
+    run()
+    return 0
+
+
 def cmd_gui(args: list[str]) -> int:
     """Launch the PySide6 GUI. Requires: pip install sauce[gui]"""
     palette = None
@@ -360,6 +375,7 @@ COMMANDS = {
     "repair":    cmd_repair,
     "init":      cmd_init,
     "dynamic":   cmd_dynamic,
+    "tui":       cmd_tui,
     "gui":       cmd_gui,
 }
 
@@ -394,6 +410,9 @@ Commands:
            Generate and apply a wallpaper-driven palette via matugen.
            Writes palettes/dynamic.json, overwrites on each call.
            Example: sauce dynamic ~/wallpapers/forest.jpg
+
+  tui      Launch the interactive TUI palette manager.
+           Requires: pip install sauce[tui]
 
   gui      [--palette <name>]
            Launch the PySide6 GUI palette editor.
