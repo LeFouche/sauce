@@ -307,6 +307,23 @@ def cmd_init(_args: list[str]) -> int:
     return 0
 
 
+def cmd_dynamic(args: list[str]) -> int:
+    variant = "dark"
+    remaining = []
+    for a in args:
+        if a in ("--dark", "--light"):
+            variant = a.lstrip("-")
+        else:
+            remaining.append(a)
+
+    if not remaining:
+        print("Usage: sauce dynamic <image_path> [--dark|--light]")
+        return 1
+
+    from .dynamic import run_dynamic
+    return 0 if run_dynamic(remaining[0], variant=variant) else 1
+
+
 def cmd_gui(args: list[str]) -> int:
     """Launch the PySide6 GUI. Requires: pip install sauce[gui]"""
     palette = None
@@ -342,6 +359,7 @@ COMMANDS = {
     "doctor":    cmd_doctor,
     "repair":    cmd_repair,
     "init":      cmd_init,
+    "dynamic":   cmd_dynamic,
     "gui":       cmd_gui,
 }
 
@@ -371,6 +389,11 @@ Commands:
 
   init     Bootstrap ~/.config/themr/ from bundled package data.
            Safe to run repeatedly — never overwrites existing user files.
+
+  dynamic  <image_path> [--dark|--light]
+           Generate and apply a wallpaper-driven palette via matugen.
+           Writes palettes/dynamic.json, overwrites on each call.
+           Example: sauce dynamic ~/wallpapers/forest.jpg
 
   gui      [--palette <name>]
            Launch the PySide6 GUI palette editor.
