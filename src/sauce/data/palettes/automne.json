@@ -1,0 +1,43 @@
+{
+  "_name": "Automne",
+  "_author": "sauce",
+  "_default_variant": "dark",
+  "dark": {
+    "_mode": "dark",
+    "_qs_name": "Automne",
+    "bg":      "#131312",
+    "bg1":     "#1b1a19",
+    "bg2":     "#232221",
+    "fg":      "#f0ebe0",
+    "fg1":     "#c07a20",
+    "subtext": "#9e5518",
+    "red":     "#c43030",
+    "orange":  "#e07828",
+    "yellow":  "#d4a020",
+    "green":   "#5c8e1a",
+    "cyan":    "#1a6878",
+    "blue":    "#2a4ab8",
+    "purple":  "#9080d8",
+    "pink":    "#de8040",
+    "teal":    "#148278"
+  },
+  "light": {
+    "_mode": "light",
+    "_qs_name": "AutomneLight",
+    "bg":      "#faf7f4",
+    "bg1":     "#f2ebe3",
+    "bg2":     "#e5d9cc",
+    "fg":      "#3a1502",
+    "fg1":     "#6b3010",
+    "subtext": "#854015",
+    "red":     "#c43030",
+    "orange":  "#e07828",
+    "yellow":  "#d4a020",
+    "green":   "#5c8e1a",
+    "cyan":    "#1a6878",
+    "blue":    "#2a4ab8",
+    "purple":  "#9080d8",
+    "pink":    "#de8040",
+    "teal":    "#148278"
+  }
+}
