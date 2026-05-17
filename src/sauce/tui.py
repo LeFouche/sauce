@@ -218,21 +218,26 @@ class _EditScreen(ModalScreen):
                 placeholder="e.g. nord",
                 id="edit_name",
             )
-            yield Label("Palette file path (JSON):")
-            yield Input(
-                placeholder="Leave blank to create empty palette",
-                id="edit_path",
-            )
             with Horizontal():
                 yield Button("Save", variant="success", id="edit_save")
                 yield Button("Cancel", variant="default", id="edit_cancel")
+
+    def _save(self) -> None:
+        name_input = self.query_one("#edit_name", Input)
+        name = name_input.value.strip()
+        if not name:
+            self.notify("Name cannot be empty", severity="error")
+            return
+        if "/" in name or ".." in name or " " in name:
+            self.notify("Name must not contain '/', '..', or spaces", severity="error")
+            return
+        self.dismiss(name)
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "edit_cancel":
             self.dismiss(None)
         elif event.button.id == "edit_save":
-            name_input = self.query_one("#edit_name", Input)
-            self.dismiss(name_input.value.strip() or None)
+            self._save()
 
 
 # ---------------------------------------------------------------------------
@@ -381,8 +386,8 @@ class SauceApp(App):
 
         try:
             palette = load_palette(name)
-        except FileNotFoundError:
-            header.update(f"[red]Palette not found:[/red] {name}")
+        except Exception as exc:
+            header.update(f"[red]Error loading palette:[/red] {name} — {exc}")
             return
 
         variants = palette_variants(palette)
@@ -407,7 +412,7 @@ class SauceApp(App):
             return
         try:
             switch_palette(self._selected_palette)
-            self._active_spec = f"{self._selected_palette}"
+            self._active_spec = self._selected_palette
             await self._populate_palette_list()
             self._set_status(
                 f"[green]Applied:[/green] {self._selected_palette}"
