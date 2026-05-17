@@ -1,0 +1,43 @@
+{
+  "_name": "Printemps",
+  "_author": "sauce",
+  "_default_variant": "dark",
+  "dark": {
+    "_mode": "dark",
+    "_qs_name": "Printemps",
+    "bg":      "#0f1610",
+    "bg1":     "#171d18",
+    "bg2":     "#1f2721",
+    "fg":      "#e8f5e9",
+    "fg1":     "#a5c8a9",
+    "subtext": "#6d9e72",
+    "red":     "#f87171",
+    "orange":  "#fb923c",
+    "yellow":  "#fde047",
+    "green":   "#4ade80",
+    "cyan":    "#67e8f9",
+    "blue":    "#60a5fa",
+    "purple":  "#c084fc",
+    "pink":    "#f472b6",
+    "teal":    "#34d399"
+  },
+  "light": {
+    "_mode": "light",
+    "_qs_name": "PrintempsLight",
+    "bg":      "#f2f6f3",
+    "bg1":     "#e4ebe5",
+    "bg2":     "#cdd8ce",
+    "fg":      "#1a2e1c",
+    "fg1":     "#2d5a34",
+    "subtext": "#3d7a46",
+    "red":     "#dc2626",
+    "orange":  "#ea580c",
+    "yellow":  "#ca8a04",
+    "green":   "#16a34a",
+    "cyan":    "#0891b2",
+    "blue":    "#2563eb",
+    "purple":  "#7c3aed",
+    "pink":    "#db2777",
+    "teal":    "#0d9488"
+  }
+}
